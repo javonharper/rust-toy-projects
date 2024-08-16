@@ -1,0 +1,9 @@
+[package]
+name = "fantasy-namegen"
+description = "A simple name generator"
+license = "MIT"
+version = "0.1.1"
+edition = "2021"
+
+[dependencies]
+rand = "0.8"
