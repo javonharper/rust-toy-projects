@@ -5,6 +5,7 @@ edition = "2021"
 
 [dependencies]
 bevy = "0.14.1"
+fantasy-namegen = "0.1.1"
 rand = "0.8.5"
 
 [profile.dev]

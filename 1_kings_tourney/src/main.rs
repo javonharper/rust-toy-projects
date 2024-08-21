@@ -7,6 +7,7 @@ mod settings;
 use bevy::prelude::*;
 use components::*;
 use events::*;
+use fantasy_namegen::Namegen;
 use rand::Rng;
 use resources::*;
 use settings::DEBUG_DAMAGE;
@@ -223,7 +224,7 @@ fn calculate_damage(
         );
     }
 
-    damage
+    return damage;
 }
 
 fn on_take_damage(
@@ -285,30 +286,21 @@ fn spawn_characters(mut commands: Commands) {
     let speed = (dexterity + health) as f32 / 4.;
     let dodge = (speed + 3.).floor() as i32;
 
-    commands.spawn((
-        components::Name("Red".to_string()),
-        Character,
-        HitPoints { current: 10 },
-        Attributes {},
-        CalculatedAttributes { dodge },
-    ));
+    let seed = rand::thread_rng().gen_range(0..1000);
+    let mut namegen = Namegen::new(seed);
+
+    let name1 = namegen.first_name();
+    let name2 = namegen.first_name();
 
     commands.spawn((
-        components::Name("Green".to_string()),
-        Character,
-        HitPoints { current: 10 },
-        CalculatedAttributes { dodge },
-    ));
-
-    commands.spawn((
-        components::Name("Blue".to_string()),
+        components::Name(name1.to_string()),
         Character,
         HitPoints { current: 10 },
         CalculatedAttributes { dodge },
     ));
 
     commands.spawn((
-        components::Name("Yellow".to_string()),
+        components::Name(name2.to_string()),
         Character,
         HitPoints { current: 10 },
         CalculatedAttributes { dodge },
@@ -331,6 +323,20 @@ fn spawn_equpment(mut commands: Commands) {
     ));
 
     commands.spawn((
+        components::Name("Great Axe".to_string()),
+        Weapon {
+            damage: "1d6+3".to_string(),
+        },
+    ));
+
+    commands.spawn((
+        components::Name("Warhammer".to_string()),
+        Weapon {
+            damage: "1d6+3".to_string(),
+        },
+    ));
+
+    commands.spawn((
         components::Name("Wooden Buckler".to_string()),
         Armor {
             damage_reduction: 1,
@@ -348,7 +354,7 @@ fn equip_characters(
         .iter()
         .find(|(_, name)| name.0 == "Leather Armor");
 
-    let short_sword = weapon_query.iter().find(|(_, name)| name.0 == "Long Sword");
+    let all_weapons = weapon_query.iter().collect::<Vec<_>>();
 
     let buckler = armour_query
         .iter()
@@ -356,8 +362,9 @@ fn equip_characters(
 
     for (character_entity, _) in character_query.iter() {
         let (armour_entity, _) = leather_armor.unwrap();
-        let (weapon_entity, _) = short_sword.unwrap();
         let (buckler_entity, _) = buckler.unwrap();
+
+        let weapon_entity = all_weapons[rand::thread_rng().gen_range(0..all_weapons.len())].0;
 
         commands.entity(character_entity).insert(EquippedWeapon {
             weapon: weapon_entity,
@@ -431,7 +438,7 @@ fn combat_system(
         }
     }
 }
-
+// TODO: what
 pub struct InitializePlugin;
 
 impl Plugin for InitializePlugin {

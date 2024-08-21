@@ -1692,6 +1692,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "fantasy-namegen"
+version = "0.1.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "5fd964c53912277e8a24d02f64453d912bf6487aeed3fb990914b96477932202"
+dependencies = [
+ "rand",
+]
+
+[[package]]
 name = "fastrand"
 version = "2.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2199,6 +2208,7 @@ name = "kings_tourney"
 version = "0.1.0"
 dependencies = [
  "bevy",
+ "fantasy-namegen",
  "rand",
 ]
 

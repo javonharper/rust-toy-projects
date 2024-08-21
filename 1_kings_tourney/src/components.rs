@@ -40,11 +40,6 @@ pub struct Weapon {
     pub damage: String,
 }
 
-#[derive(Component)]
-pub struct Attributes {
-    // pub dexterity: i32,
-    // pub health: i32,
-}
 
 #[derive(Component)]
 pub struct CalculatedAttributes {

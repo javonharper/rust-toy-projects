@@ -1,6 +1,11 @@
-# Features I want to add
-* Weapon and Armour that affect attack speed, damage resistance
-* Hit Locations
-* Dodge, Parry's and Blocks
-* Combat "stances" - all out attack, devensive attack
-* Fatigue and injury
+# Features 
+* [ ] Weapon and 
+* [x] Armour and damage resistance
+* [ ] Hit Locations
+* [x] Dodges
+* [ ] Parrys 
+* [x] Blocks
+* [ ] Combat "stances" - all out attack, devensive attack
+* [ ] Fatigue
+* [ ] injury
+* [ ] Read 
